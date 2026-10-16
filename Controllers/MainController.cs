@@ -5,6 +5,8 @@ using Mini_Shop.Modulers.Users.Users_DTO_s;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Mini_Shop.Modulers.Products.Products_DTO_s;
 using Mini_Shop.Modulers.Products.Products_Services;
+using Mini_Shop.Modulers.Orders.Orders_DTO_s;
+using Mini_Shop.Modulers.Orders.Orders_Services;
 
 
 
@@ -17,10 +19,13 @@ namespace Mini_Shop.Controllers
         private readonly IUserServices _userServices;
         private readonly IProductServices _productServices;
 
-        public MainController(IUserServices userServices,IProductServices productServices) 
+        private readonly IOrderServices _orderServices;
+
+        public MainController(IUserServices userServices,IProductServices productServices,IOrderServices orderServices) 
         { 
             _userServices = userServices;
             _productServices = productServices;
+            _orderServices = orderServices;
         }
 
         [HttpPost("users")]
@@ -34,7 +39,7 @@ namespace Mini_Shop.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("users/{id:int}")]
         public IActionResult GetUserById(int id)
         {
             try { 
@@ -58,13 +63,37 @@ namespace Mini_Shop.Controllers
             }
         }
 
-        [HttpGet("product")]
+        [HttpGet("productAll")]
         public IActionResult GetAllProduct() {
             try {
                 var allproduct=_productServices.GetAllProduct();
                 return Ok(allproduct);
             } catch {
                 return BadRequest("No Any Product Yet");
+            }
+        }
+
+        [HttpPost("Orders")]
+
+        public IActionResult CreateOder([FromBody] CreateOrderDtos createOrderDtos)
+        {
+            try { 
+                var createdOrder=_orderServices.CreateOreder(createOrderDtos);
+                return Ok(createdOrder);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
+            }
+
+
+        }
+        [HttpGet("users/{id:int}/orders")]
+        public IActionResult GetOrderByUserID(int userId )
+        {
+            try {
+                var UserOders=_orderServices.GetOrderByUserId(userId);
+                return Ok(UserOders);
+            } catch (Exception ex) {
+                return BadRequest(ex.Message);
             }
         }
 

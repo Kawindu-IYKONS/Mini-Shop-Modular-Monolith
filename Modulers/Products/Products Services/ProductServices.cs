@@ -38,5 +38,23 @@ namespace Mini_Shop.Modulers.Products.Products_Services
            
         }
 
+        public void ReduceProduct(int productId,int quantity) {
+            if (quantity < 0) {
+                throw new Exception("Quantity must be greater than 0");
+            }
+
+            var check=_productDataStore.GetProductById(productId);
+
+            if (check == null) {
+                throw new Exception("ID dose't exist ");
+            }
+
+            if (check.Stock < quantity) {
+                throw new Exception($"Can't provide your quantity Curruntly Available: {check.Stock} ");
+
+            }
+            _productDataStore.ReduseStock(productId, quantity);
+        }
+
     }
 }

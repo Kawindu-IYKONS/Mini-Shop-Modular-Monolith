@@ -12,10 +12,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Modulers\Orders\Orders DTO%27s\" />
-    <Folder Include="Modulers\Orders\Orders Services\" />
-    <Folder Include="Modulers\Orders\Orders Data Store\" />
-  </ItemGroup>
-
 </Project>
