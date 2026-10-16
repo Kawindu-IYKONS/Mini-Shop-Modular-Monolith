@@ -22,6 +22,7 @@ Folder Structure
 
 The project is structured into independent modules under the Modulers directory, with a single entry point via the Controllers.
 
+
 Mini_Shop/
 ├── Controllers/
 │   └── MainController.cs        # Single entry point for all API routes
