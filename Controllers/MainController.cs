@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Mini_Shop.Modulers.Users.Users_Services;
 using Mini_Shop.Modulers.Users.Users_DTO_s;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Mini_Shop.Modulers.Products.Products_DTO_s;
 using Mini_Shop.Modulers.Products.Products_Services;
 using Mini_Shop.Modulers.Orders.Orders_DTO_s;
@@ -12,7 +11,7 @@ using Mini_Shop.Modulers.Orders.Orders_Services;
 
 namespace Mini_Shop.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api")]
     [ApiController]
     public class MainController : ControllerBase
     {
@@ -31,23 +30,19 @@ namespace Mini_Shop.Controllers
         [HttpPost("users")]
         public IActionResult CreateUser([FromBody]CreateUserDto createUserDto)
         {
-            try {
+            
                 var result=_userServices.CreateUser(createUserDto);
                 return Ok(result);
-            }catch (Exception ex) {
-                return BadRequest(ex.Message);
-            }
+           
         }
 
         [HttpGet("users/{id:int}")]
         public IActionResult GetUserById(int id)
         {
-            try { 
+            
                 var registeredUser=_userServices.GetUserById(id);
                 return Ok(registeredUser);
-            } catch (Exception ex) { 
-                return NotFound(ex.Message);
-            }
+           
         }
 
         [HttpPost("product")]
@@ -65,27 +60,21 @@ namespace Mini_Shop.Controllers
 
         [HttpGet("productAll")]
         public IActionResult GetAllProduct() {
-            try {
+            
                 var allproduct=_productServices.GetAllProduct();
                 return Ok(allproduct);
-            } catch {
-                return BadRequest("No Any Product Yet");
-            }
+            
         }
 
-        [HttpPost("Orders")]
+       
 
-        public IActionResult CreateOder([FromBody] CreateOrderDtos createOrderDtos)
+        [HttpPost("orders")]
+        public IActionResult CreateOrder([FromBody] CreateOrderDto createOrderDto)
         {
-            try { 
-                var createdOrder=_orderServices.CreateOreder(createOrderDtos);
-                return Ok(createdOrder);
-            } catch (Exception ex) {
-                return BadRequest(ex.Message);
-            }
-
-
+            var createdOrder = _orderServices.CreateOrder(createOrderDto);
+            return Ok(createdOrder);
         }
+
         [HttpGet("users/{id:int}/orders")]
         public IActionResult GetOrderByUserID(int userId )
         {
