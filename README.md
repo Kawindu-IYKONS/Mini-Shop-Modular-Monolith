@@ -1,64 +1,150 @@
-Mini Shop - Modular Monolith
+# Mini Shop - Modular Monolith
 
-A simple backend for a Mini Shop built with ASP.NET Core, following a Modular Monolith architecture. The application uses in-memory data storage and strict module boundaries to ensure clean architecture and encapsulation.
+A simple backend application for a Mini Shop built with **ASP.NET Core 10** using the Modular Monolith architecture.
 
-How to Run the Project
+The application contains three main modules: **Users, Products, and Orders**. Each module manages its own data and business logic. The application uses in-memory storage, dependency injection, DTOs, and centralized exception handling.
 
-Ensure you have the .NET 8 SDK (or your specific version) installed.
+## Technologies Used
 
-Clone the repository to your local machine.
+- C#
+- ASP.NET Core 10
+- REST API
+- Swagger / OpenAPI
+- Dependency Injection
+- In-memory data storage
+- Data Annotations for DTO validation
 
-Open a terminal or command prompt in the project root directory.
+## How to Run the Project
 
-Run the following command to start the application:
+### Prerequisites
 
+- [Visual Studio](https://visualstudio.microsoft.com/) with ASP.NET and web development support
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+
+### Steps
+
+1. Clone the repository to your local machine.
+
+   ```bash
+   git clone <repository-url>
+   ```
+
+2. Open the solution (`.sln`) file in Visual Studio.
+
+3. Set `Mini_Shop` as the startup project if it is not already selected.
+
+4. Build the solution using **Build → Build Solution**.
+
+5. Start the application by clicking **Start** or pressing **F5**.
+
+6. If Visual Studio pauses at a breakpoint or stops when an exception is thrown during debugging, press **F5** again to continue execution. This may happen when debugging exceptions; check the actual HTTP response to determine whether the API request succeeded or failed.
+
+7. Once the application starts, open the Swagger UI using the HTTPS URL shown in the browser or Visual Studio output. It usually looks like:
+
+   ```text
+   https://localhost:<port>/swagger
+   ```
+
+   Replace `<port>` with the actual port assigned to your application.
+
+You can now use Swagger UI to test the API endpoints.
+
+### Running from the Terminal (Optional)
+
+Open a terminal in the directory containing the project file (`.csproj`) and run:
+
+```bash
+dotnet restore
 dotnet run
+```
 
+Open the Swagger URL displayed in the terminal.
 
-Open your web browser and navigate to the Swagger UI to test the endpoints:
-https://localhost:<port>/swagger (Check your terminal for the exact port, e.g., 7131).
+## Project Structure
 
-Folder Structure
-
-The project is structured into independent modules under the Modulers directory, with a single entry point via the Controllers.
-
-
+```text
 Mini_Shop/
 ├── Controllers/
-│   └── MainController.cs        # Single entry point for all API routes
+│   └── MainController.cs
+│
 ├── Modulers/
-│   ├── Notifications/           # Stretch Goal: Listens to Order events
 │   ├── Orders/
-│   │   ├── Orders_Data_Store/   # Internal data storage for Orders
-│   │   ├── Orders_DTOs/         # Request/Response objects
-│   │   └── Orders_Services/     # Public interface and business logic
+│   │   ├── Orders_Data_Store/
+│   │   │   └── OrderDataStore.cs
+│   │   ├── Orders_DTO_s/
+│   │   │   ├── CreateOrderDto.cs
+│   │   │   └── GetOrderDto.cs
+│   │   └── Orders_Services/
+│   │       ├── IOrderServices.cs
+│   │       └── OrderServices.cs
+│   │
 │   ├── Products/
 │   │   ├── Products_Data_Store/
-│   │   ├── Products_DTOs/
+│   │   │   └── ProductDataStore.cs
+│   │   ├── Products_DTO_s/
+│   │   │   ├── CreateProductDto.cs
+│   │   │   └── GetProductDto.cs
 │   │   └── Products_Services/
+│   │       ├── IProductServices.cs
+│   │       └── ProductServices.cs
+│   │
 │   └── Users/
 │       ├── Users_Data_Store/
-│       ├── Users_DTOs/
+│       ├── Users_DTO_s/
 │       └── Users_Services/
-├
-│                  # Shared internal event bus for inter-module messaging
-└── Program.cs                   # Application configuration and DI container
+│
+├── exceptions/
+│   ├── BusinessValidationException.cs
+│   ├── DuplicateEmailException.cs
+│   ├── GlobalExceptionHandler.cs
+│   └── NotFoundException.cs
+│
+├── Program.cs
+└── Mini_Shop.csproj
+```
 
+*Note: This tree shows the main files and folders. Update it if your actual project structure differs.*
 
-Why This Module Separation?
+## API Modules
 
-I separated the application into independent modules (Users, Products, Orders) to enforce strict bounded contexts and encapsulation. Each module is responsible only for its own data and business rules, acting almost like a mini-application. By keeping the DataStore and entity classes internal, I ensured that modules cannot secretly manipulate each other's data. They can only communicate through explicitly defined public service interfaces (e.g., IProductServices.ReduceStock). This separation makes the codebase highly maintainable, easy to test, and prevents "spaghetti code" where everything is tightly coupled.
+### Users Module
 
-Comparison with Microservices
+Responsible for creating users and retrieving user information. It handles user-related data and email uniqueness validation.
 
-If the "Orders" module were to become its own independent Microservice, the architecture would change significantly. Instead of communicating with Users and Products via direct, in-memory C# method calls (Dependency Injection), the Orders service would need to make network calls (like HTTP REST or gRPC) or use an external message broker (like RabbitMQ or Kafka) to verify users and reduce stock. The Orders service would also have its own physical database and be deployed on a separate server or container. While microservices offer independent scaling and deployment, they introduce complex challenges like network latency, handling partial failures, and managing distributed transactions—complexities we avoid in this modular monolith while still keeping the code cleanly separated.
+### Products Module
 
-Assumptions Made
+Responsible for creating products, retrieving products, and managing stock. Product prices use `decimal` to represent monetary values.
 
-In-Memory Storage: Since no database is used, all data is stored in memory arrays. I assumed it is acceptable that all data will be lost when the application restarts.
+### Orders Module
 
-Synchronous Validation: Stock reduction and user verification are handled synchronously during the order placement request.
+Responsible for creating orders and retrieving orders by user ID. Before creating an order, it checks the user and product and requests the product service to reduce stock.
 
-Single Controller: I assumed MainController should handle all routing logic using standard ASP.NET Core [Route] attributes to direct traffic to the injected module services.
+## Why Modular Monolith?
 
-IDs: Simple auto-incrementing integers are used for IDs across all modules for simplicity.
+The application is organized into separate modules so that each module owns its business logic and data access responsibilities.
+
+The modules communicate through service interfaces, such as `IUserServices` and `IProductServices`, instead of directly manipulating another module's data store. Data store and entity classes are marked `internal` to limit access outside the current assembly.
+
+**Important limitation:** Because all modules are currently in the same project and assembly, `internal` does not prevent one module from accessing another module's internal classes. The boundary is therefore supported by the design and coding conventions, rather than fully enforced by the compiler. Separate projects/assemblies and architecture tests could enforce these boundaries more strongly.
+
+## Exception Handling and Validation
+
+- DTO validation attributes such as `[Required]` and `[Range]` validate incoming request data.
+- `NotFoundException` represents resources that cannot be found.
+- `DuplicateEmailException` handles duplicate email registration.
+- `BusinessValidationException` handles business rule violations.
+- `GlobalExceptionHandler` converts handled exceptions into appropriate HTTP responses.
+
+## Modular Monolith vs. Microservices
+
+In this project, modules communicate through in-process C# service calls using dependency injection. They share the same application process and deployment.
+
+If the Orders module became a separate microservice, it would need a communication mechanism such as HTTP REST, gRPC, or messaging. It could also have its own database and deployment lifecycle. Microservices offer independent deployment and scaling, but introduce additional complexity such as network failures, latency, and distributed transaction management.
+
+## Assumptions and Limitations
+
+- **In-memory storage:** Data is stored in memory and is lost when the application restarts.
+- **Synchronous order processing:** User verification, product verification, and stock reduction occur during the order request.
+- **Single controller:** `MainController` exposes the API routes for the modules.
+- **Auto-incrementing IDs:** IDs are generated in memory for simplicity.
+- **Single application:** All modules run within the same ASP.NET Core application.
