@@ -148,3 +148,9 @@ If the Orders module became a separate microservice, it would need a communicati
 - **Single controller:** `MainController` exposes the API routes for the modules.
 - **Auto-incrementing IDs:** IDs are generated in memory for simplicity.
 - **Single application:** All modules run within the same ASP.NET Core application.
+
+Question
+All modules are in one project. Does `internal` really stop the Orders module from using `ProductDataStore`? If not, what would actually enforce the boundary?
+
+Answer
+No. Since all modules are in the same project and assembly, internal does not prevent the Orders module from accessing ProductDataStore.To enforce the boundary, we can separate modules into different projects/assemblies and expose only public interfaces for communication.
