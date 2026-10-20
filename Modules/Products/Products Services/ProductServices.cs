@@ -33,13 +33,14 @@ namespace Mini_Shop.Modulers.Products.Products_Services
                 createProductDto.Stock
             );
 
-            return new GetProductDto
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Price = product.Price,
-                Stock = product.Stock
-            };
+            //return new GetProductDto
+            //{
+            //    Id = product.Id,
+            //    Name = product.Name,
+            //    Price = product.Price,
+            //    Stock = product.Stock
+                
+            //};
         }
 
         public List<GetProductDto> GetAllProduct()
