@@ -46,11 +46,6 @@ namespace Mini_Shop.Modulers.Products.Products_Services
         {
             var products = _productDataStore.GetAll();
 
-            if (products.Count == 0)
-            {
-                throw new NotFoundException("No products found.");
-            }
-
             return products
                 .Select(p => new GetProductDto
                 {
