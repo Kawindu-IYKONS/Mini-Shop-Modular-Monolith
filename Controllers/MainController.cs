@@ -48,15 +48,9 @@ namespace Mini_Shop.Controllers
         [HttpPost("products")]
         public IActionResult CreateProduct([FromBody] CreateProductDto createProductDto)
         {
-            try
-            {
                 var createProduct = _productServices.CreateProduct(createProductDto);
                 return Ok(createProduct);
-                    }
-            catch (Exception ex) {
-                return BadRequest(ex.Message);
-            }
-        }
+         }
 
         [HttpGet("products")]
         public IActionResult GetAllProduct() {
