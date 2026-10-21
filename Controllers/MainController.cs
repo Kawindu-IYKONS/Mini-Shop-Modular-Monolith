@@ -45,7 +45,7 @@ namespace Mini_Shop.Controllers
            
         }
 
-        [HttpPost("product")]
+        [HttpPost("products")]
         public IActionResult CreateProduct([FromBody] CreateProductDto createProductDto)
         {
             try
@@ -58,12 +58,18 @@ namespace Mini_Shop.Controllers
             }
         }
 
-        [HttpGet("productAll")]
+        [HttpGet("products")]
         public IActionResult GetAllProduct() {
             
                 var allproduct=_productServices.GetAllProduct();
                 return Ok(allproduct);
             
+        }
+
+        [HttpGet("products/{id:int}")]
+        public IActionResult GetProductById(int id) {
+            var product=_productServices.GetProductById(id);
+            return Ok(product);
         }
 
        
