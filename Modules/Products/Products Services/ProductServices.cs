@@ -14,17 +14,17 @@ namespace Mini_Shop.Modulers.Products.Products_Services
         {
             if (string.IsNullOrWhiteSpace(createProductDto.Name))
             {
-                throw new ValidationException("Product name is required.");
+                throw new BusinessValidationException("Product name is required.");
             }
 
             if (createProductDto.Price < 0)
             {
-                throw new ValidationException("Price cannot be negative.");
+                throw new BusinessValidationException("Price cannot be negative.");
             }
 
             if (createProductDto.Stock < 0)
             {
-                throw new ValidationException("Stock cannot be negative.");
+                throw new BusinessValidationException("Stock cannot be negative.");
             }
 
             var product = _productDataStore.Add(
