@@ -76,14 +76,12 @@ namespace Mini_Shop.Controllers
         }
 
         [HttpGet("users/{id:int}/orders")]
-        public IActionResult GetOrderByUserID(int userId )
+        public IActionResult GetOrderByUserID(int id )
         {
-            try {
-                var UserOders=_orderServices.GetOrderByUserId(userId);
+            
+                var UserOders=_orderServices.GetOrderByUserId(id);
                 return Ok(UserOders);
-            } catch (Exception ex) {
-                return BadRequest(ex.Message);
-            }
+            
         }
 
 
