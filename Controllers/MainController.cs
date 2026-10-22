@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using Mini_Shop.Modules.Users.Users_Services;
-using Mini_Shop.Modules.Users.Users_DTO_s;
+using Mini_Shop.Modules.Users.Services;
+using Mini_Shop.Modules.Users.Dtos;
 using Mini_Shop.Modules.Products.Dtos;
 using Mini_Shop.Modules.Products.Services;
 using Mini_Shop.Modules.Orders.Dtos;

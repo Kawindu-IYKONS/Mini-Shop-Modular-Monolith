@@ -1,7 +1,7 @@
 ﻿
 using Mini_Shop.Exceptions;
 
-namespace Mini_Shop.Modules.Users.Users_Data_Store
+namespace Mini_Shop.Modules.Users.DataStore
 {
     internal class User
     {

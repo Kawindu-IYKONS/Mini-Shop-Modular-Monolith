@@ -89,9 +89,9 @@ Mini_Shop/
 │   │       └── ProductServices.cs
 │   │
 │   └── Users/
-│       ├── Users_Data_Store/
-│       ├── Users_DTO_s/
-│       └── Users_Services/
+│       ├── DataStore/
+│       ├── Dtos/
+│       └── Services/
 │
 ├── Exceptions/
 │   ├── BusinessValidationException.cs
