@@ -1,8 +1,5 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Mini_Shop.exceptions;
+using Mini_Shop.Exceptions;
 
 namespace Mini_Shop.Modules.Users.Users_Data_Store
 {

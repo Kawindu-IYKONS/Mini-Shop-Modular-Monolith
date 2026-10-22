@@ -1,5 +1,5 @@
 
-using Mini_Shop.exceptions;
+using Mini_Shop.Exceptions;
 using Mini_Shop.Modules.Orders.Orders_Services;
 using Mini_Shop.Modules.Products.Products_Services;
 using Mini_Shop.Modules.Users.Users_Services;

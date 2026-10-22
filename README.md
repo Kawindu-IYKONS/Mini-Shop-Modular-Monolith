@@ -37,7 +37,7 @@ The application contains three main modules: **Users, Products, and Orders**. Ea
 
 5. Start the application by clicking **Start** or pressing **F5**.
 
-6. If Visual Studio pauses at a breakpoint or stops when an exception is thrown during debugging, press **F5** again to continue execution. This may happen when debugging exceptions; check the actual HTTP response to determine whether the API request succeeded or failed.
+6. If Visual Studio pauses at a breakpoint or stops when an exception is thrown during debugging, press **F5** again to continue execution. This may happen when debugging Exceptions; check the actual HTTP response to determine whether the API request succeeded or failed.
 
 7. Once the application starts, open the Swagger UI using the HTTPS URL shown in the browser or Visual Studio output. It usually looks like:
 
@@ -93,7 +93,7 @@ Mini_Shop/
 │       ├── Users_DTO_s/
 │       └── Users_Services/
 │
-├── exceptions/
+├── Exceptions/
 │   ├── BusinessValidationException.cs
 │   ├── DuplicateEmailException.cs
 │   ├── GlobalExceptionHandler.cs
@@ -133,7 +133,7 @@ The modules communicate through service interfaces, such as `IUserServices` and 
 - `NotFoundException` represents resources that cannot be found.
 - `DuplicateEmailException` handles duplicate email registration.
 - `BusinessValidationException` handles business rule violations.
-- `GlobalExceptionHandler` converts handled exceptions into appropriate HTTP responses.
+- `GlobalExceptionHandler` converts handled Exceptions into appropriate HTTP responses.
 
 ## Modular Monolith vs. Microservices
 

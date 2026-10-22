@@ -1,5 +1,5 @@
 ﻿
-using Mini_Shop.exceptions;
+using Mini_Shop.Exceptions;
 using Mini_Shop.Modules.Products.Products_Data_Store;
 using Mini_Shop.Modules.Products.Products_DTO_s;
 using System.ComponentModel.DataAnnotations;

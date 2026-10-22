@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc; 
 
 
-namespace Mini_Shop.exceptions
+namespace Mini_Shop.Exceptions
 {
     public class GlobalExceptionHandler : IExceptionHandler
     {

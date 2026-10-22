@@ -1,7 +1,7 @@
 ﻿
 using Mini_Shop.Modules.Users.Users_DTO_s;
 using Mini_Shop.Modules.Users.Users_Data_Store;
-using Mini_Shop.exceptions;
+using Mini_Shop.Exceptions;
 
 namespace Mini_Shop.Modules.Users.Users_Services;
 
