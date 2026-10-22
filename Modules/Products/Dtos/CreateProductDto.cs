@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Mini_Shop.Modules.Products.Products_DTO_s
+namespace Mini_Shop.Modules.Products.Dtos
 {
     public class CreateProductDto
     {

@@ -79,12 +79,12 @@ Mini_Shop/
 │   │       └── OrderServices.cs
 │   │
 │   ├── Products/
-│   │   ├── Products_Data_Store/
+│   │   ├── DataStore/
 │   │   │   └── ProductDataStore.cs
-│   │   ├── Products_DTO_s/
+│   │   ├── Dtos/
 │   │   │   ├── CreateProductDto.cs
 │   │   │   └── GetProductDto.cs
-│   │   └── Products_Services/
+│   │   └── Services/
 │   │       ├── IProductServices.cs
 │   │       └── ProductServices.cs
 │   │

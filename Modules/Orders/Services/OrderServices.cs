@@ -2,7 +2,7 @@
 
 using Mini_Shop.Modules.Orders.DataStore;
 using Mini_Shop.Modules.Orders.Dtos;
-using Mini_Shop.Modules.Products.Products_Services;
+using Mini_Shop.Modules.Products.Services;
 using Mini_Shop.Modules.Users.Users_Services;
 
 namespace Mini_Shop.Modules.Orders.Services

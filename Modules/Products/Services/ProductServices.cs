@@ -1,10 +1,10 @@
 ﻿
 using Mini_Shop.Exceptions;
-using Mini_Shop.Modules.Products.Products_Data_Store;
-using Mini_Shop.Modules.Products.Products_DTO_s;
+using Mini_Shop.Modules.Products.DataStore;
+using Mini_Shop.Modules.Products.Dtos;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mini_Shop.Modules.Products.Products_Services
+namespace Mini_Shop.Modules.Products.Services
 {
     public class ProductServices : IProductServices
     {

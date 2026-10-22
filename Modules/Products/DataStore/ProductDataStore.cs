@@ -1,5 +1,5 @@
 ﻿
-namespace Mini_Shop.Modules.Products.Products_Data_Store;
+namespace Mini_Shop.Modules.Products.DataStore;
 
 internal class Product
 {
