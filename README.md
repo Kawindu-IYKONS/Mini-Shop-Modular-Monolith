@@ -69,12 +69,12 @@ Mini_Shop/
 │
 ├── Modules/
 │   ├── Orders/
-│   │   ├── Orders_Data_Store/
+│   │   ├── DataStore/
 │   │   │   └── OrderDataStore.cs
-│   │   ├── Orders_DTO_s/
+│   │   ├── Dtos/
 │   │   │   ├── CreateOrderDto.cs
 │   │   │   └── GetOrderDto.cs
-│   │   └── Orders_Services/
+│   │   └── Services/
 │   │       ├── IOrderServices.cs
 │   │       └── OrderServices.cs
 │   │

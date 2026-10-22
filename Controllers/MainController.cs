@@ -4,8 +4,8 @@ using Mini_Shop.Modules.Users.Users_Services;
 using Mini_Shop.Modules.Users.Users_DTO_s;
 using Mini_Shop.Modules.Products.Products_DTO_s;
 using Mini_Shop.Modules.Products.Products_Services;
-using Mini_Shop.Modules.Orders.Orders_DTO_s;
-using Mini_Shop.Modules.Orders.Orders_Services;
+using Mini_Shop.Modules.Orders.Dtos;
+using Mini_Shop.Modules.Orders.Services;
 
 
 

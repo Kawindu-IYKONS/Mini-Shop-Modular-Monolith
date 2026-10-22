@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace Mini_Shop.Modules.Orders.Orders_DTO_s
+namespace Mini_Shop.Modules.Orders.Dtos
 {
     public class CreateOrderDto
     {
