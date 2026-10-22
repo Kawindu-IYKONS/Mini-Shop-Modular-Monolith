@@ -1,6 +1,58 @@
 @Mini_Shop_HostAddress = http://localhost:5059
 
-GET {{Mini_Shop_HostAddress}}/weatherforecast/
+### 1. Create a User (POST)
+POST {{Mini_Shop_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+
+###
+
+### 2. Get User By ID (GET)
+GET {{Mini_Shop_HostAddress}}/api/users/1
 Accept: application/json
 
 ###
+
+### 3. Create a Product (POST)
+POST {{Mini_Shop_HostAddress}}/api/products
+Content-Type: application/json
+
+{
+  "name": "Laptop",
+  "price": 1200.00,
+  "stock": 10
+}
+
+###
+
+### 4. Get All Products (GET)
+GET {{Mini_Shop_HostAddress}}/api/products
+Accept: application/json
+
+###
+
+### 5. Get Product By ID (GET)
+GET {{Mini_Shop_HostAddress}}/api/products/1
+Accept: application/json
+
+###
+
+### 6. Create an Order (POST)
+POST {{Mini_Shop_HostAddress}}/api/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "productId": 1,
+  "quantity": 2
+}
+
+###
+
+### 7. Get Orders By User ID (GET)
+GET {{Mini_Shop_HostAddress}}/api/users/1/orders
+Accept: application/json
