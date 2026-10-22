@@ -67,7 +67,7 @@ Mini_Shop/
 ├── Controllers/
 │   └── MainController.cs
 │
-├── Modulers/
+├── Modules/
 │   ├── Orders/
 │   │   ├── Orders_Data_Store/
 │   │   │   └── OrderDataStore.cs

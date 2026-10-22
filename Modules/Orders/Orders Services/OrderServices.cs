@@ -1,11 +1,11 @@
 ﻿
 using Mini_Shop.exceptions;
-using Mini_Shop.Modulers.Orders.Orders_Data_Store;
-using Mini_Shop.Modulers.Orders.Orders_DTO_s;
-using Mini_Shop.Modulers.Products.Products_Services;
-using Mini_Shop.Modulers.Users.Users_Services;
+using Mini_Shop.Modules.Orders.Orders_Data_Store;
+using Mini_Shop.Modules.Orders.Orders_DTO_s;
+using Mini_Shop.Modules.Products.Products_Services;
+using Mini_Shop.Modules.Users.Users_Services;
 
-namespace Mini_Shop.Modulers.Orders.Orders_Services
+namespace Mini_Shop.Modules.Orders.Orders_Services
 {
     public class OrderServices : IOrderServices
     {

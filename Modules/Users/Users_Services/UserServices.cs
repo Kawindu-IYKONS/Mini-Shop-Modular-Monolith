@@ -1,9 +1,9 @@
 ﻿
-using Mini_Shop.Modulers.Users.Users_DTO_s;
-using Mini_Shop.Modulers.Users.Users_Data_Store;
+using Mini_Shop.Modules.Users.Users_DTO_s;
+using Mini_Shop.Modules.Users.Users_Data_Store;
 using Mini_Shop.exceptions;
 
-namespace Mini_Shop.Modulers.Users.Users_Services;
+namespace Mini_Shop.Modules.Users.Users_Services;
 
 public class UserServices : IUserServices
 {

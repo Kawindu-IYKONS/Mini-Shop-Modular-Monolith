@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mini_Shop.exceptions;
 
-namespace Mini_Shop.Modulers.Users.Users_Data_Store
+namespace Mini_Shop.Modules.Users.Users_Data_Store
 {
     internal class User
     {

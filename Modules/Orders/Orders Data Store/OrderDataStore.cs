@@ -1,5 +1,5 @@
 ﻿
-namespace Mini_Shop.Modulers.Orders.Orders_Data_Store
+namespace Mini_Shop.Modules.Orders.Orders_Data_Store
 {
     internal class Order
     {

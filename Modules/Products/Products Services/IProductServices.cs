@@ -1,7 +1,7 @@
 ﻿
-using Mini_Shop.Modulers.Products.Products_DTO_s;
+using Mini_Shop.Modules.Products.Products_DTO_s;
 
-namespace Mini_Shop.Modulers.Products.Products_Services
+namespace Mini_Shop.Modules.Products.Products_Services
 {
     public interface IProductServices
     {
