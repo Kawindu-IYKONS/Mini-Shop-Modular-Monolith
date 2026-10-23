@@ -1,5 +1,5 @@
 ﻿
-namespace Mini_Shop.Modulers.Orders.Orders_DTO_s
+namespace Mini_Shop.Modules.Orders.Dtos
 {
     public class GetOrderDto
     {

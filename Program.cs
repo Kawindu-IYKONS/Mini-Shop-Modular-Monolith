@@ -1,8 +1,8 @@
 
-using Mini_Shop.exceptions;
-using Mini_Shop.Modulers.Orders.Orders_Services;
-using Mini_Shop.Modulers.Products.Products_Services;
-using Mini_Shop.Modulers.Users.Users_Services;
+using Mini_Shop.Exceptions;
+using Mini_Shop.Modules.Orders.Services;
+using Mini_Shop.Modules.Products.Services;
+using Mini_Shop.Modules.Users.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

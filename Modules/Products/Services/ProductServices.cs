@@ -1,10 +1,10 @@
 ﻿
-using Mini_Shop.exceptions;
-using Mini_Shop.Modulers.Products.Products_Data_Store;
-using Mini_Shop.Modulers.Products.Products_DTO_s;
+using Mini_Shop.Exceptions;
+using Mini_Shop.Modules.Products.DataStore;
+using Mini_Shop.Modules.Products.Dtos;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mini_Shop.Modulers.Products.Products_Services
+namespace Mini_Shop.Modules.Products.Services
 {
     public class ProductServices : IProductServices
     {
@@ -14,17 +14,17 @@ namespace Mini_Shop.Modulers.Products.Products_Services
         {
             if (string.IsNullOrWhiteSpace(createProductDto.Name))
             {
-                throw new ValidationException("Product name is required.");
+                throw new BusinessValidationException("Product name is required.");
             }
 
             if (createProductDto.Price < 0)
             {
-                throw new ValidationException("Price cannot be negative.");
+                throw new BusinessValidationException("Price cannot be negative.");
             }
 
             if (createProductDto.Stock < 0)
             {
-                throw new ValidationException("Stock cannot be negative.");
+                throw new BusinessValidationException("Stock cannot be negative.");
             }
 
             var product = _productDataStore.Add(
@@ -45,11 +45,6 @@ namespace Mini_Shop.Modulers.Products.Products_Services
         public List<GetProductDto> GetAllProduct()
         {
             var products = _productDataStore.GetAll();
-
-            if (products.Count == 0)
-            {
-                throw new NotFoundException("No products found.");
-            }
 
             return products
                 .Select(p => new GetProductDto

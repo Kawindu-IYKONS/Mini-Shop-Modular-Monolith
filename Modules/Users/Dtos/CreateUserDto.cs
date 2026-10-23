@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Mini_Shop.Modulers.Users.Users_DTO_s
+namespace Mini_Shop.Modules.Users.Dtos
 {
     public class CreateUserDto
     {

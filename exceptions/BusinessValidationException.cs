@@ -1,4 +1,4 @@
-﻿namespace Mini_Shop.exceptions
+﻿namespace Mini_Shop.Exceptions
 {
     public class BusinessValidationException:Exception
     {

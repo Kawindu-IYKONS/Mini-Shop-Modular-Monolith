@@ -24,41 +24,36 @@ The application contains three main modules: **Users, Products, and Orders**. Ea
 ### Steps
 
 1. Clone the repository to your local machine.
-
    ```bash
    git clone <repository-url>
    ```
 
-2. Open the solution (`.sln`) file in Visual Studio.
+2. Open the solution (.slnx) file in Visual Studio.
 
-3. Set `Mini_Shop` as the startup project if it is not already selected.
+3. Set Mini Shop as the startup project if it is not already selected.
 
-4. Build the solution using **Build → Build Solution**.
+4. Build the solution using Build → Build Solution.
 
-5. Start the application by clicking **Start** or pressing **F5**.
+5. Start the application by clicking Start or pressing F5.
 
-6. If Visual Studio pauses at a breakpoint or stops when an exception is thrown during debugging, press **F5** again to continue execution. This may happen when debugging exceptions; check the actual HTTP response to determine whether the API request succeeded or failed.
+6. If Visual Studio pauses at a breakpoint or stops when an exception is thrown during debugging, press F5 again to continue execution. This may happen when debugging Exceptions; check the actual HTTP response to determine whether the API request succeeded or failed.
 
 7. Once the application starts, open the Swagger UI using the HTTPS URL shown in the browser or Visual Studio output. It usually looks like:
 
-   ```text
-   https://localhost:<port>/swagger
-   ```
+  - https://localhost:<port>/swagger
 
-   Replace `<port>` with the actual port assigned to your application.
+Replace <port> with the actual port assigned to your application.
 
 You can now use Swagger UI to test the API endpoints.
 
-### Running from the Terminal (Optional)
+### Running from the Terminal
 
-Open a terminal in the directory containing the project file (`.csproj`) and run:
-
-```bash
-dotnet restore
-dotnet run
-```
-
-Open the Swagger URL displayed in the terminal.
+1. Open your terminal or command prompt.
+2. Navigate to the project directory.
+3. Restore the dependencies:
+   ```bash
+   dotnet restore
+   ```
 
 ## Project Structure
 
@@ -67,31 +62,36 @@ Mini_Shop/
 ├── Controllers/
 │   └── MainController.cs
 │
-├── Modulers/
+├── Modules/
 │   ├── Orders/
-│   │   ├── Orders_Data_Store/
+│   │   ├── DataStore/
 │   │   │   └── OrderDataStore.cs
-│   │   ├── Orders_DTO_s/
+│   │   ├── Dtos/
 │   │   │   ├── CreateOrderDto.cs
 │   │   │   └── GetOrderDto.cs
-│   │   └── Orders_Services/
+│   │   └── Services/
 │   │       ├── IOrderServices.cs
 │   │       └── OrderServices.cs
 │   │
 │   ├── Products/
-│   │   ├── Products_Data_Store/
+│   │   ├── DataStore/
 │   │   │   └── ProductDataStore.cs
-│   │   ├── Products_DTO_s/
+│   │   ├── Dtos/
 │   │   │   ├── CreateProductDto.cs
 │   │   │   └── GetProductDto.cs
-│   │   └── Products_Services/
+│   │   └── Services/
 │   │       ├── IProductServices.cs
 │   │       └── ProductServices.cs
 │   │
 │   └── Users/
-│       ├── Users_Data_Store/
-│       ├── Users_DTO_s/
-│       └── Users_Services/
+│       ├── DataStore/
+│       │   └── UserDataStore.cs
+│       ├── Dtos/
+│       │   ├── CreateUserDto.cs
+│       │   └── GetUserDto.cs
+│       └── Services/
+│           ├── IUserServices.cs
+│           └── UserServices.cs
 │
 ├── exceptions/
 │   ├── BusinessValidationException.cs
@@ -100,40 +100,53 @@ Mini_Shop/
 │   └── NotFoundException.cs
 │
 ├── Program.cs
-└── Mini_Shop.csproj
+└── Mini Shop.csproj
 ```
-
-*Note: This tree shows the main files and folders. Update it if your actual project structure differs.*
-
 ## API Modules
 
 ### Users Module
-
 Responsible for creating users and retrieving user information. It handles user-related data and email uniqueness validation.
 
 ### Products Module
-
-Responsible for creating products, retrieving products, and managing stock. Product prices use `decimal` to represent monetary values.
+Responsible for creating products, retrieving products, and managing stock. Product prices use decimal to represent monetary values.
 
 ### Orders Module
-
 Responsible for creating orders and retrieving orders by user ID. Before creating an order, it checks the user and product and requests the product service to reduce stock.
+
+
+## API Endpoints
+
+| Method | Route | Description |
+| :--- | :--- | :--- |
+| **POST** | `/api/users` | Register a new user |
+| **GET** | `/api/users/{id}` | Get user details by ID |
+| **POST** | `/api/products` | Create a new product |
+| **GET** | `/api/products` | Get all products |
+| **GET** | `/api/products/{id}` | Get product details by ID |
+| **POST** | `/api/orders` | Place a new order |
+| **GET** | `/api/users/{id}/orders` | Get all orders placed by a specific user |
+
 
 ## Why Modular Monolith?
 
 The application is organized into separate modules so that each module owns its business logic and data access responsibilities.
 
-The modules communicate through service interfaces, such as `IUserServices` and `IProductServices`, instead of directly manipulating another module's data store. Data store and entity classes are marked `internal` to limit access outside the current assembly.
+The modules communicate through service interfaces, such as IUserServices and IProductServices, instead of directly manipulating another module's data store. Data store and entity classes are marked internal to limit access outside the current assembly.
 
-**Important limitation:** Because all modules are currently in the same project and assembly, `internal` does not prevent one module from accessing another module's internal classes. The boundary is therefore supported by the design and coding conventions, rather than fully enforced by the compiler. Separate projects/assemblies and architecture tests could enforce these boundaries more strongly.
+Important limitation: Because all modules are currently in the same project and assembly, internal does not prevent one module from accessing another module's internal classes. The boundary is therefore supported by the design and coding conventions, rather than fully enforced by the compiler. Separate projects/assemblies and architecture tests could enforce these boundaries more strongly.
+
 
 ## Exception Handling and Validation
 
-- DTO validation attributes such as `[Required]` and `[Range]` validate incoming request data.
-- `NotFoundException` represents resources that cannot be found.
-- `DuplicateEmailException` handles duplicate email registration.
-- `BusinessValidationException` handles business rule violations.
-- `GlobalExceptionHandler` converts handled exceptions into appropriate HTTP responses.
+DTO validation attributes such as [Required] and [Range] validate incoming request data.
+
+NotFoundException represents resources that cannot be found.
+
+DuplicateEmailException handles duplicate email registration.
+
+BusinessValidationException handles business rule violations.
+
+GlobalExceptionHandler converts handled Exceptions into appropriate HTTP responses.
 
 ## Modular Monolith vs. Microservices
 
@@ -143,14 +156,18 @@ If the Orders module became a separate microservice, it would need a communicati
 
 ## Assumptions and Limitations
 
-- **In-memory storage:** Data is stored in memory and is lost when the application restarts.
-- **Synchronous order processing:** User verification, product verification, and stock reduction occur during the order request.
-- **Single controller:** `MainController` exposes the API routes for the modules.
-- **Auto-incrementing IDs:** IDs are generated in memory for simplicity.
-- **Single application:** All modules run within the same ASP.NET Core application.
+In-memory storage: Data is stored in memory and is lost when the application restarts.
 
-Question
-All modules are in one project. Does `internal` really stop the Orders module from using `ProductDataStore`? If not, what would actually enforce the boundary?
+Synchronous order processing: User verification, product verification, and stock reduction occur during the order request.
 
-Answer
-No. Since all modules are in the same project and assembly, internal does not prevent the Orders module from accessing ProductDataStore.To enforce the boundary, we can separate modules into different projects/assemblies and expose only public interfaces for communication.
+Single controller: MainController exposes the API routes for the modules.
+
+Auto-incrementing IDs: IDs are generated in memory for simplicity.
+
+Single application: All modules run within the same ASP.NET Core application.
+
+# Question
+All modules are in one project. Does internal really stop the Orders module from using ProductDataStore? If not, what would actually enforce the boundary?
+
+# Answer
+No. Since all modules are in the same project and assembly, internal does not prevent the Orders module from accessing ProductDataStore. To enforce the boundary, we can separate modules into different projects/assemblies and expose only public interfaces for communication.

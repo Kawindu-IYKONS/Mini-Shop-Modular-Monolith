@@ -1,7 +1,7 @@
 ﻿
-using Mini_Shop.Modulers.Orders.Orders_DTO_s;
+using Mini_Shop.Modules.Orders.Dtos;
 
-namespace Mini_Shop.Modulers.Orders.Orders_Services
+namespace Mini_Shop.Modules.Orders.Services
 {
     public interface IOrderServices
     {

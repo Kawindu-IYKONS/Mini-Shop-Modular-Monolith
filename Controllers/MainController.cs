@@ -1,11 +1,11 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using Mini_Shop.Modulers.Users.Users_Services;
-using Mini_Shop.Modulers.Users.Users_DTO_s;
-using Mini_Shop.Modulers.Products.Products_DTO_s;
-using Mini_Shop.Modulers.Products.Products_Services;
-using Mini_Shop.Modulers.Orders.Orders_DTO_s;
-using Mini_Shop.Modulers.Orders.Orders_Services;
+using Mini_Shop.Modules.Users.Services;
+using Mini_Shop.Modules.Users.Dtos;
+using Mini_Shop.Modules.Products.Dtos;
+using Mini_Shop.Modules.Products.Services;
+using Mini_Shop.Modules.Orders.Dtos;
+using Mini_Shop.Modules.Orders.Services;
 
 
 
@@ -45,25 +45,25 @@ namespace Mini_Shop.Controllers
            
         }
 
-        [HttpPost("product")]
+        [HttpPost("products")]
         public IActionResult CreateProduct([FromBody] CreateProductDto createProductDto)
         {
-            try
-            {
                 var createProduct = _productServices.CreateProduct(createProductDto);
                 return Ok(createProduct);
-                    }
-            catch (Exception ex) {
-                return BadRequest(ex.Message);
-            }
-        }
+         }
 
-        [HttpGet("productAll")]
+        [HttpGet("products")]
         public IActionResult GetAllProduct() {
             
                 var allproduct=_productServices.GetAllProduct();
                 return Ok(allproduct);
             
+        }
+
+        [HttpGet("products/{id:int}")]
+        public IActionResult GetProductById(int id) {
+            var product=_productServices.GetProductById(id);
+            return Ok(product);
         }
 
        
@@ -76,14 +76,12 @@ namespace Mini_Shop.Controllers
         }
 
         [HttpGet("users/{id:int}/orders")]
-        public IActionResult GetOrderByUserID(int userId )
+        public IActionResult GetOrderByUserID(int id )
         {
-            try {
-                var UserOders=_orderServices.GetOrderByUserId(userId);
+            
+                var UserOders=_orderServices.GetOrderByUserId(id);
                 return Ok(UserOders);
-            } catch (Exception ex) {
-                return BadRequest(ex.Message);
-            }
+            
         }
 
 

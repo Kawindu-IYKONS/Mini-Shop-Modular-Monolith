@@ -1,5 +1,5 @@
-﻿using Mini_Shop.Modulers.Users.Users_DTO_s;
-namespace Mini_Shop.Modulers.Users.Users_Services
+﻿using Mini_Shop.Modules.Users.Dtos;
+namespace Mini_Shop.Modules.Users.Services
 {
     public interface IUserServices
     {
