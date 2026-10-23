@@ -20,53 +20,53 @@ namespace Mini_Shop.Controllers
 
         private readonly IOrderServices _orderServices;
 
-        public MainController(IUserServices userServices,IProductServices productServices,IOrderServices orderServices) 
-        { 
+        public MainController(IUserServices userServices, IProductServices productServices, IOrderServices orderServices)
+        {
             _userServices = userServices;
             _productServices = productServices;
             _orderServices = orderServices;
         }
 
         [HttpPost("users")]
-        public IActionResult CreateUser([FromBody]CreateUserDto createUserDto)
+        public IActionResult CreateUser([FromBody] CreateUserDto createUserDto)
         {
-            
-                var result=_userServices.CreateUser(createUserDto);
-                return Ok(result);
-           
+
+            var result = _userServices.CreateUser(createUserDto);
+            return Ok(result);
+
         }
 
         [HttpGet("users/{id:int}")]
         public IActionResult GetUserById(int id)
         {
-            
-                var registeredUser=_userServices.GetUserById(id);
-                return Ok(registeredUser);
-           
+
+            var registeredUser = _userServices.GetUserById(id);
+            return Ok(registeredUser);
+
         }
 
         [HttpPost("products")]
         public IActionResult CreateProduct([FromBody] CreateProductDto createProductDto)
         {
-                var createProduct = _productServices.CreateProduct(createProductDto);
-                return Ok(createProduct);
-         }
+            var createProduct = _productServices.CreateProduct(createProductDto);
+            return Ok(createProduct);
+        }
 
         [HttpGet("products")]
-        public IActionResult GetAllProduct() {
-            
-                var allproduct=_productServices.GetAllProduct();
-                return Ok(allproduct);
-            
+        public IActionResult GetAllProduct()
+        {
+
+            var allproduct = _productServices.GetAllProduct();
+            return Ok(allproduct);
+
         }
 
         [HttpGet("products/{id:int}")]
-        public IActionResult GetProductById(int id) {
-            var product=_productServices.GetProductById(id);
+        public IActionResult GetProductById(int id)
+        {
+            var product = _productServices.GetProductById(id);
             return Ok(product);
         }
-
-       
 
         [HttpPost("orders")]
         public IActionResult CreateOrder([FromBody] CreateOrderDto createOrderDto)
@@ -76,12 +76,12 @@ namespace Mini_Shop.Controllers
         }
 
         [HttpGet("users/{id:int}/orders")]
-        public IActionResult GetOrderByUserID(int id )
+        public IActionResult GetOrderByUserID(int id)
         {
-            
-                var UserOders=_orderServices.GetOrderByUserId(id);
-                return Ok(UserOders);
-            
+
+            var UserOders = _orderServices.GetOrderByUserId(id);
+            return Ok(UserOders);
+
         }
 
 
