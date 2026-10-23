@@ -5,7 +5,7 @@ POST {{Mini_Shop_HostAddress}}/api/users
 Content-Type: application/json
 
 {
-  "name": "John Doe",
+  "userName": "John",
   "email": "john@example.com"
 }
 
