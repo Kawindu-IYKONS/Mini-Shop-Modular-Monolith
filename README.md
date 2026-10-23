@@ -26,18 +26,19 @@ The application contains three main modules: **Users, Products, and Orders**. Ea
 1. Clone the repository to your local machine.
    ```bash
    git clone <repository-url>
+   ```
 
-2.Open the solution (.slnx) file in Visual Studio.
+2. Open the solution (.slnx) file in Visual Studio.
 
-3.Set Mini Shop as the startup project if it is not already selected.
+3. Set Mini Shop as the startup project if it is not already selected.
 
-4.Build the solution using Build → Build Solution.
+4. Build the solution using Build → Build Solution.
 
-5.Start the application by clicking Start or pressing F5.
+5. Start the application by clicking Start or pressing F5.
 
-6.If Visual Studio pauses at a breakpoint or stops when an exception is thrown during debugging, press F5 again to continue execution. This may happen when debugging Exceptions; check the actual HTTP response to determine whether the API request succeeded or failed.
+6. If Visual Studio pauses at a breakpoint or stops when an exception is thrown during debugging, press F5 again to continue execution. This may happen when debugging Exceptions; check the actual HTTP response to determine whether the API request succeeded or failed.
 
-7.Once the application starts, open the Swagger UI using the HTTPS URL shown in the browser or Visual Studio output. It usually looks like:
+7. Once the application starts, open the Swagger UI using the HTTPS URL shown in the browser or Visual Studio output. It usually looks like:
 
   - https://localhost:<port>/swagger
 
@@ -45,8 +46,18 @@ Replace <port> with the actual port assigned to your application.
 
 You can now use Swagger UI to test the API endpoints.
 
+### Running from the Terminal
+
+1. Open your terminal or command prompt.
+2. Navigate to the project directory.
+3. Restore the dependencies:
+   ```bash
+   dotnet restore
+   ```
+
 ## Project Structure
 
+```text
 Mini_Shop/
 ├── Controllers/
 │   └── MainController.cs
@@ -74,27 +85,32 @@ Mini_Shop/
 │   │
 │   └── Users/
 │       ├── DataStore/
+│       │   └── UserDataStore.cs
 │       ├── Dtos/
+│       │   ├── CreateUserDto.cs
+│       │   └── GetUserDto.cs
 │       └── Services/
+│           ├── IUserServices.cs
+│           └── UserServices.cs
 │
-├── Exceptions/
+├── exceptions/
 │   ├── BusinessValidationException.cs
 │   ├── DuplicateEmailException.cs
 │   ├── GlobalExceptionHandler.cs
 │   └── NotFoundException.cs
 │
 ├── Program.cs
-└── Mini_Shop.csproj
-
+└── Mini Shop.csproj
+```
 ## API Modules
 
-# Users Module
+### Users Module
 Responsible for creating users and retrieving user information. It handles user-related data and email uniqueness validation.
 
-# Products Module
+### Products Module
 Responsible for creating products, retrieving products, and managing stock. Product prices use decimal to represent monetary values.
 
-# Orders Module
+### Orders Module
 Responsible for creating orders and retrieving orders by user ID. Before creating an order, it checks the user and product and requests the product service to reduce stock.
 
 
