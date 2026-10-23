@@ -25,7 +25,7 @@ public class UserServices : IUserServices
         };
     }
 
-    public GetUserDto? GetUserById(int id)
+    public GetUserDto GetUserById(int id)
     {
         var userData = _userDataStore.GetById(id);
 
